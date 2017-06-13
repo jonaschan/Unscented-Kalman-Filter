@@ -25,22 +25,26 @@ UKF::UKF()
   // Set initial example covariance matrix (Values obtained from lectures)
   P_ = MatrixXd(5, 5);
   
-  P_ << 0.0043,	   -0.0013,		0.0030,	   -0.0022,		-0.0020,
-	   -0.0013,		0.0077,		0.0011,		0.0071,		 0.0060,
-	    0.0030,		0.0011,		0.0054,		0.0007,		 0.0008,
-	   -0.0022,		0.0071,		0.0007,		0.0098,		 0.0100,
-	   -0.0020,		0.0060,		0.0008,		0.0100,		 0.0123;
+  // Here we initialise the covariance matrix using the identity matrix to
+  // allow these initialised values to be used across other datasets.
+  P_ << 1,		0,		0,		0,		 0,
+		0,		1,		0,		0,		 0,
+	    0,		0,		1,		0,		 0,
+		0,		0,		0,		1,		 0,
+		0,		0,		0,		0,		 1;
   //***********************************************************************
 
   //***********************************************************************
   //                  Initialise variables with values	                 //
   //***********************************************************************	  
   
+  //This value is tuned to give the expected RMSE values
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 8;
+  std_a_ = 1.5;
 
+  //This value is tuned to give the expected RMSE values
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 0.35;
+  std_yawdd_ = 0.5;
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
